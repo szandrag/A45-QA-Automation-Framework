@@ -18,6 +18,14 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+
+    public static void playSongButton(){
+        WebElement playNext = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        WebElement play = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        playNext.click();
+        play.click();
+    }
+
     @BeforeMethod
     public void launchBrowser() {
         //      Added ChromeOptions argument below to fix websocket error
@@ -36,7 +44,7 @@ public class BaseTest {
     public static void navigateToPage() {
         driver.get(url);
     }
-    public static void provideEmail(String email) {
+    public static void provideEmail (String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.click();//not needed
         emailField.clear();
@@ -52,5 +60,10 @@ public class BaseTest {
     public static void clickSubmit() {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
+    }
+
+    public static boolean isSoundBarDisplayed() {
+        WebElement soundBar = driver.findElement(By.xpath("//img[@alt='Sound bars']"));
+        return soundBar.isDisplayed();
     }
 }
